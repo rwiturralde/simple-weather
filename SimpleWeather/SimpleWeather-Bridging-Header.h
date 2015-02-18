@@ -10,5 +10,6 @@
 #define SimpleWeather_SimpleWeather_Bridging_Header_h
 
 #import <TSMessages/TSMessage.h>
+#import <LBBlurredImage/UIImageView+LBBlurredImage.h>
 
 #endif
