@@ -15,6 +15,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var tableView: UITableView
     var screenHeight: CGFloat
     
+    override init() {
+        backgroundImageView = UIImageView()
+        blurredImageView = UIImageView()
+        tableView = UITableView()
+        screenHeight = 0.0
+        super.init()
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        backgroundImageView = UIImageView()
+        blurredImageView = UIImageView()
+        tableView = UITableView()
+        screenHeight = 0.0
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+     required init(coder aDecoder: NSCoder) {
+        backgroundImageView = UIImageView()
+        blurredImageView = UIImageView()
+        tableView = UITableView()
+        screenHeight = 0.0
+        super.init(coder: aDecoder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,22 +86,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cellIdentifier: String = "CellIdentifier"
-        var cell = UITableViewCell()
-        /*cell = tableView.dequeueReusableCellWithIdentifier("CellIdentifier")
+        var cell: UITableViewCell? = (tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as UITableViewCell)
         
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: cellIdentifier)
         }
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
-        cell.backgroundColor = UIColor(white: 0, alpha: 0.2)
-        cell.textLabel?.textColor = UIColor.whiteColor()
-        cell.detailTextLabel?.textColor = UIColor.whiteColor()
+        cell!.selectionStyle = UITableViewCellSelectionStyle.None
+        cell!.backgroundColor = UIColor(white: 0, alpha: 0.2)
+        cell!.textLabel?.textColor = UIColor.whiteColor()
+        cell!.detailTextLabel?.textColor = UIColor.whiteColor()
         
         // TODO: Setup the cell
         
-        */
-        return cell
+        
+        return cell!
     }
     
     override func viewWillLayoutSubviews() {
