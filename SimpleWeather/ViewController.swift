@@ -64,6 +64,73 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableView.separatorColor = UIColor(white: 1, alpha: 0.2)
         self.tableView.pagingEnabled = true
         self.view.addSubview(self.tableView)
+        
+        var headerFrame: CGRect = UIScreen.mainScreen().bounds
+        var inset: CGFloat = 20;
+        var temperatureHeight: CGFloat = 110
+        var hiloHeight: CGFloat = 40
+        var iconHeight: CGFloat = 30
+        
+        var hiloFrame: CGRect = CGRectMake(inset,
+            headerFrame.size.height - hiloHeight,
+            headerFrame.size.width - (2 * inset),
+            hiloHeight)
+        var temperatureFrame: CGRect = CGRectMake(inset,
+            headerFrame.size.height - (temperatureHeight + hiloHeight),
+            headerFrame.size.width - (2 * inset),
+            temperatureHeight)
+        var iconFrame: CGRect = CGRectMake(inset, temperatureFrame.origin.y - iconHeight, iconHeight, iconHeight)
+        
+        var conditionsFrame: CGRect = iconFrame
+        conditionsFrame.size.width = self.view.bounds.size.width - (((2 * inset) + iconHeight) + 10)
+        conditionsFrame.origin.x = iconFrame.origin.x + (iconHeight + 10)
+        
+        
+        var header: UIView = UIView(frame: headerFrame)
+        header.backgroundColor = UIColor.clearColor()
+        self.tableView.tableHeaderView = header
+        
+        // Temperature label - bottom left
+        var temperatureLabel: UILabel = UILabel(frame: temperatureFrame)
+        temperatureLabel.backgroundColor = UIColor.clearColor()
+        temperatureLabel.textColor = UIColor.whiteColor()
+        temperatureLabel.text = "0°"
+        temperatureLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 120)
+        header.addSubview(temperatureLabel)
+        
+        // Hi-Lo Label - bottom left
+        var hiloLabel: UILabel = UILabel(frame: hiloFrame)
+        hiloLabel.backgroundColor = UIColor.clearColor()
+        hiloLabel.textColor = UIColor.whiteColor()
+        hiloLabel.text = "0° / 0°";
+        hiloLabel.font = UIFont(name: "HelveticaNeue-Light", size: 28)
+        header.addSubview(hiloLabel)
+        
+        // City Label - top
+        var cityLabel: UILabel = UILabel(frame: CGRectMake(0, 20, self.view.bounds.size.width, 30))
+        cityLabel.backgroundColor = UIColor.clearColor()
+        cityLabel.textColor = UIColor.whiteColor()
+        cityLabel.text = "Loading...";
+        cityLabel.font = UIFont(name: "HelveticaNeue-Light", size: 18)
+        cityLabel.textAlignment = NSTextAlignment.Center
+        header.addSubview(cityLabel)
+        
+        // Conditions Label
+        var conditionsLabel: UILabel = UILabel(frame: conditionsFrame)
+        conditionsLabel.backgroundColor = UIColor.clearColor()
+        conditionsLabel.text = "Clear"
+        conditionsLabel.font = UIFont(name: "HelveticaNeue-Light", size: 18)
+        conditionsLabel.textColor = UIColor.whiteColor()
+        header.addSubview(conditionsLabel)
+        
+        // bottom left
+        var iconView: UIImageView = UIImageView(frame: iconFrame)
+        iconView.image = UIImage(named: "weather-clear")
+        iconView.contentMode = UIViewContentMode.ScaleAspectFit
+        iconView.backgroundColor = UIColor.clearColor()
+        header.addSubview(iconView)
+
+        
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
