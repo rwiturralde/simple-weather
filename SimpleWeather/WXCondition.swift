@@ -40,12 +40,18 @@ class WXCondition {
         icon = ""
     }
     
-    private func imageName() -> NSString {
+    init! (jsonDict: Dictionary<String, AnyObject>) {
+        date = NSDate(timeIntervalSince1970: jsonDict["date"])
+        
+        
+    }
+    
+    internal func imageName() -> NSString {
         var map: Dictionary<String, String> = imageMap()
         return map[self.icon]!
     }
     
-    func imageMap() -> Dictionary<String, String> {
+    internal func imageMap() -> Dictionary<String, String> {
         return [
                 "01d" : "weather-clear",
                 "02d" : "weather-few",
@@ -68,7 +74,7 @@ class WXCondition {
             ]
     }
     
-    func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
+    internal func getValueFromJSONforMember(member: String) -> [NSObject : AnyObject]! {
         return [
             "date": "dt",
             "locationName": "name",
@@ -85,6 +91,5 @@ class WXCondition {
             "windSpeed": "wind.speed"
         ];
     }
-    
     
 }

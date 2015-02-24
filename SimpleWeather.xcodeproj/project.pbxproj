@@ -101,6 +101,7 @@
 		8967440F1A9429EE00D92DA5 /* SimpleWeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleWeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		896744141A9429EE00D92DA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		896744151A9429EE00D92DA5 /* SimpleWeatherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleWeatherTests.swift; sourceTree = "<group>"; };
+		89F5CEF31A9A2B060033CAF6 /* WeatherPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = WeatherPlayground.playground; sourceTree = "<group>"; };
 		D1974B1995C87B0D30452FB4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDE370F46A7C3F5E52F1F916 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -176,6 +177,7 @@
 		896743F11A9429EE00D92DA5 = {
 			isa = PBXGroup;
 			children = (
+				89F5CEF31A9A2B060033CAF6 /* WeatherPlayground.playground */,
 				8966B2AF1A9435D10011DA5E /* Images */,
 				892DDBAC1A96D1CC00B62F5D /* Libs */,
 				896743FC1A9429EE00D92DA5 /* SimpleWeather */,

@@ -9,5 +9,13 @@
 import Foundation
 
 class WXDailyForecast : WXCondition {
-    
+ 
+    override internal func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
+        var paths: Dictionary = super.JSONKeyPathsByPropertyKey()
+        
+        paths["tempHigh"] = "temp.max"
+        paths["tempLow"] = "temp.min"
+        
+        return paths
+    }
 }
