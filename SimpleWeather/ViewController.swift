@@ -14,12 +14,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var blurredImageView: UIImageView
     var tableView: UITableView
     var screenHeight: CGFloat
+    var weatherManager: WXManager
     
     override init() {
         backgroundImageView = UIImageView()
         blurredImageView = UIImageView()
         tableView = UITableView()
         screenHeight = 0.0
+        weatherManager = WXManager()
         super.init()
     }
     
@@ -28,6 +30,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         blurredImageView = UIImageView()
         tableView = UITableView()
         screenHeight = 0.0
+        weatherManager = WXManager()
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
@@ -36,6 +39,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         blurredImageView = UIImageView()
         tableView = UITableView()
         screenHeight = 0.0
+        weatherManager = WXManager()
         super.init(coder: aDecoder)
     }
     
@@ -129,7 +133,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         iconView.contentMode = UIViewContentMode.ScaleAspectFit
         iconView.backgroundColor = UIColor.clearColor()
         header.addSubview(iconView)
-
+        
+        NSLog("about to tell the weather manager to find the current location")
+        weatherManager.findCurrentLocation()
+        
         
     }
     

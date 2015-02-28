@@ -11,85 +11,79 @@ import Foundation
 class WXCondition {
     
     var date: NSDate
-    var humidity: NSNumber
-    var temperature: NSNumber
-    var tempHigh: NSNumber
-    var tempLow: NSNumber
-    var locationName: NSString
+    var humidity: Double
+    var temperature: Double
+    var tempHigh: Double
+    var tempLow: Double
+    var locationName: String
     var sunrise: NSDate
     var sunset: NSDate
-    var conditionDescription: NSString
-    var condition: NSString
-    var windBearing: NSNumber
-    var windSpeed: NSNumber
-    var icon: NSString
+    var conditionDescription: String
+    var condition: String
+    var windBearing: Double
+    var windSpeed: Double
+    var icon: String
     
     init!() {
         date = NSDate()
-        humidity = 0
-        temperature = 0
-        tempHigh = 0
-        tempLow = 0
+        humidity = 0.0
+        temperature = 0.0
+        tempHigh = 0.0
+        tempLow = 0.0
         locationName = ""
         sunrise = NSDate()
         sunset = NSDate()
         conditionDescription = ""
         condition = ""
-        windBearing = 0
-        windSpeed = 0
+        windBearing = 0.0
+        windSpeed = 0.0
         icon = ""
     }
     
-    init! (jsonDict: Dictionary<String, AnyObject>) {
-        date = NSDate(timeIntervalSince1970: jsonDict["date"])
-        
-        
+    init! (date_: NSDate, humidity_: Double, temperature_: Double, tempHigh_: Double, tempLow_: Double, locationName_: String, sunrise_: NSDate, sunset_: NSDate, conditionDescription_: String, condition_: String, windBearing_: Double, windSpeed_: Double, icon_: String) {
+        date = date_
+        humidity = humidity_
+        temperature = temperature_
+        tempHigh = tempHigh_
+        tempLow = tempLow_
+        locationName = locationName_
+        sunrise = sunrise_
+        sunset = sunset_
+        conditionDescription = conditionDescription_
+        condition = condition_
+        windBearing = windBearing_
+        windSpeed = windSpeed_
+        icon = icon_
     }
     
-    internal func imageName() -> NSString {
+    internal func imageName() -> String {
         var map: Dictionary<String, String> = imageMap()
         return map[self.icon]!
     }
     
     internal func imageMap() -> Dictionary<String, String> {
-        return [
-                "01d" : "weather-clear",
-                "02d" : "weather-few",
-                "03d" : "weather-few",
-                "04d" : "weather-broken",
-                "09d" : "weather-shower",
-                "10d" : "weather-rain",
-                "11d" : "weather-tstorm",
-                "13d" : "weather-snow",
-                "50d" : "weather-mist",
-                "01n" : "weather-moon",
-                "02n" : "weather-few-night",
-                "03n" : "weather-few-night",
-                "04n" : "weather-broken",
-                "09n" : "weather-shower",
-                "10n" : "weather-rain-night",
-                "11n" : "weather-tstorm",
-                "13n" : "weather-snow",
-                "50n" : "weather-mist",
-            ]
-    }
-    
-    internal func getValueFromJSONforMember(member: String) -> [NSObject : AnyObject]! {
-        return [
-            "date": "dt",
-            "locationName": "name",
-            "humidity": "main.humidity",
-            "temperature": "main.temp",
-            "tempHigh": "main.temp_max",
-            "tempLow": "main.temp_min",
-            "sunrise": "sys.sunrise",
-            "sunset": "sys.sunset",
-            "conditionDescription": "weather.description",
-            "condition": "weather.main",
-            "icon": "weather.icon",
-            "windBearing": "wind.deg",
-            "windSpeed": "wind.speed"
-        ];
+        
+        var map : Dictionary<String, String> = ["01d" : "weather-clear"]
+        map["02d"] = "weather-few"
+        
+        map["03d"] = "weather-few"
+        map["04d"] = "weather-broken"
+        map["09d"] = "weather-shower"
+        map["10d"] = "weather-rain"
+        map["11d"] = "weather-tstorm"
+        map["13d"] = "weather-snow"
+        map["50d"] = "weather-mist"
+        map["01n"] = "weather-moon"
+        map["02n"] = "weather-few-night"
+        map["03n"] = "weather-few-night"
+        map["04n"] = "weather-broken"
+        map["09n"] = "weather-shower"
+        map["10n"] = "weather-rain-night"
+        map["11n"] = "weather-tstorm"
+        map["13n"] = "weather-snow"
+        map["50n"] = "weather-mist"
+        
+        return map
     }
     
 }
