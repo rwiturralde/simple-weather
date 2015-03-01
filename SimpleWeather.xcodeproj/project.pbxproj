@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		57A1DF02551E2FDB3BCA932B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1974B1995C87B0D30452FB4 /* libPods.a */; };
 		892DDBAE1A96D1F100B62F5D /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892DDBAD1A96D1F100B62F5D /* SwiftyJSON.swift */; };
-		894EF72A1AA0162800313031 /* WXLocationAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894EF7291AA0162800313031 /* WXLocationAware.swift */; };
+		894EF72A1AA0162800313031 /* WXWeatherDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894EF7291AA0162800313031 /* WXWeatherDelegate.swift */; };
 		8966B2CB1A9435D10011DA5E /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 8966B2B01A9435D10011DA5E /* bg.png */; };
 		8966B2CC1A9435D10011DA5E /* bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8966B2B11A9435D10011DA5E /* bg@2x.png */; };
 		8966B2CD1A9435D10011DA5E /* weather-broken.png in Resources */ = {isa = PBXBuildFile; fileRef = 8966B2B31A9435D10011DA5E /* weather-broken.png */; };
@@ -60,7 +60,7 @@
 /* Begin PBXFileReference section */
 		6A10220BD047002F780958E9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		892DDBAD1A96D1F100B62F5D /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
-		894EF7291AA0162800313031 /* WXLocationAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXLocationAware.swift; sourceTree = "<group>"; };
+		894EF7291AA0162800313031 /* WXWeatherDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXWeatherDelegate.swift; sourceTree = "<group>"; };
 		8966B2AE1A942F4B0011DA5E /* SimpleWeather-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimpleWeather-Bridging-Header.h"; sourceTree = "<group>"; };
 		8966B2B01A9435D10011DA5E /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		8966B2B11A9435D10011DA5E /* bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg@2x.png"; sourceTree = "<group>"; };
@@ -210,7 +210,7 @@
 				8966B2E51A96B9F50011DA5E /* WXClient.swift */,
 				8966B2E71A96BA2E0011DA5E /* WXManager.swift */,
 				8966B2E91A96BA4E0011DA5E /* WXCondition.swift */,
-				894EF7291AA0162800313031 /* WXLocationAware.swift */,
+				894EF7291AA0162800313031 /* WXWeatherDelegate.swift */,
 			);
 			path = SimpleWeather;
 			sourceTree = "<group>";
@@ -424,7 +424,7 @@
 				896744001A9429EE00D92DA5 /* AppDelegate.swift in Sources */,
 				892DDBAE1A96D1F100B62F5D /* SwiftyJSON.swift in Sources */,
 				8966B2E61A96B9F50011DA5E /* WXClient.swift in Sources */,
-				894EF72A1AA0162800313031 /* WXLocationAware.swift in Sources */,
+				894EF72A1AA0162800313031 /* WXWeatherDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

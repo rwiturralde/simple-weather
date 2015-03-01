@@ -17,6 +17,9 @@ class WXManager : NSObject, CLLocationManagerDelegate {
             updateCurrentConditions(newLocation)
             updateDailyForecast(newLocation)
             updateHourlyForecast(newLocation)
+            if (delegate != nil) {
+                delegate!.onLocationChange(currentCondition, dailyConditions: dailyForecast, hourlyConditions: hourlyForecast)
+            }
         }
     }
     
@@ -28,6 +31,8 @@ class WXManager : NSObject, CLLocationManagerDelegate {
     internal var isFirstUpdate: Bool
     internal var weatherClient: WXClient
     
+    var delegate: WeatherDelegate?
+    
     override init() {
         currentCondition = WXCondition()
         hourlyForecast = Array()
@@ -37,7 +42,7 @@ class WXManager : NSObject, CLLocationManagerDelegate {
         locationManager = CLLocationManager()
         locationManager.requestAlwaysAuthorization()
         weatherClient = WXClient()
-
+        delegate = nil
         super.init()
 
         locationManager.delegate = self

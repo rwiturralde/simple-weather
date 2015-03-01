@@ -8,7 +8,7 @@
 
 import Foundation
 
-class WXCondition {
+class WXCondition : NSObject {
     
     var date: NSDate
     var humidity: Double
@@ -24,7 +24,7 @@ class WXCondition {
     var windSpeed: Double
     var icon: String
     
-    init!() {
+    override init() {
         date = NSDate()
         humidity = 0.0
         temperature = 0.0
@@ -38,9 +38,10 @@ class WXCondition {
         windBearing = 0.0
         windSpeed = 0.0
         icon = ""
+        super.init()
     }
     
-    init! (date_: NSDate, humidity_: Double, temperature_: Double, tempHigh_: Double, tempLow_: Double, locationName_: String, sunrise_: NSDate, sunset_: NSDate, conditionDescription_: String, condition_: String, windBearing_: Double, windSpeed_: Double, icon_: String) {
+    init (date_: NSDate, humidity_: Double, temperature_: Double, tempHigh_: Double, tempLow_: Double, locationName_: String, sunrise_: NSDate, sunset_: NSDate, conditionDescription_: String, condition_: String, windBearing_: Double, windSpeed_: Double, icon_: String) {
         date = date_
         humidity = humidity_
         temperature = temperature_

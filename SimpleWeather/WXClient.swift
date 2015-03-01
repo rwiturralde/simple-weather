@@ -37,7 +37,7 @@ class WXClient : NSObject {
         :return A RACSignal to subscribe to for data from the URL endpoint.
     **/
     func fetchJSONFromURL(url: NSURL) -> JSON {
-        NSLog("Fetching %@", url.absoluteString!)
+        NSLog("Fetching JSON from URL: \(url.absoluteString)")
         
         var returnJson: JSON? = nil
         
@@ -59,6 +59,7 @@ class WXClient : NSObject {
                     var json: JSON? = JSON(jsonResult)
                         
                     if (json != nil) {
+                        //NSLog("Received JSON response: \(json)")
                         NSLog("Received JSON response...")
                         returnJson = json
                     } else {
@@ -66,7 +67,7 @@ class WXClient : NSObject {
                     }
                     self.inFlight = false
                 } else {
-                    NSLog("Error: %@", error)
+                    NSLog("Error: \(error)")
                     self.inFlight = false
                 }
             })
