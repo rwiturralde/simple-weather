@@ -124,45 +124,57 @@ class WXClient : NSObject {
             
             for var i = 0; i < json_["list"].count; ++i {
                 
-                var date: NSDate = NSDate(timeIntervalSince1970: json_["list"][i]["dt"].doubleValue)
-                var humidity: Double = json_["list"][i]["main"]["humdity"].doubleValue
-                var temperature: Double = json_["list"][i]["main"]["temp"].doubleValue
-                var tempHigh: Double = json_["list"][i]["main"]["temp_max"].doubleValue
-                var templow: Double = json_["list"][i]["main"]["temp_min"].doubleValue
-                var location: String = json_["list"][i]["name"].stringValue
-                var sunrise: NSDate = NSDate(timeIntervalSince1970: json_["list"][i]["sys"]["sunrise"].doubleValue)
-                var sunset: NSDate = NSDate(timeIntervalSince1970: json_["list"][i]["sys"]["sunset"].doubleValue)
-                var description: String = json_["list"][i]["weather"][0]["description"].stringValue
-                var condition: String = json_["list"][i]["weather"][0]["main"].stringValue
-                var windBearing: Double = json_["list"][i]["wind"]["deg"].doubleValue
-                var windSpeed: Double = json_["list"][i]["wind"]["speed"].doubleValue //* MPS_TO_MPH
-                var icon: String = json_["list"][i]["weather"][0]["icon"].stringValue
-                
-                
-                // Create WXCondition from the JSON data returned
-                returnConditionArray.append(WXCondition(date_: date, humidity_: humidity, temperature_: temperature, tempHigh_: tempHigh, tempLow_: templow, locationName_: location, sunrise_: sunrise, sunset_: sunset, conditionDescription_: description, condition_: condition, windBearing_: windBearing, windSpeed_: windSpeed, icon_: icon))
+                if (json_["list"][i]["temp"] != nil) {
+                    returnConditionArray.append(getDailyCondition(json_["list"][i]))
+                } else {
+                    returnConditionArray.append(getCurrentOrHourlyCondition(json_["list"][i]))
+                }
             }
             
             return returnConditionArray
             
         } else {
-            var date: NSDate = NSDate(timeIntervalSince1970: json_["dt"].doubleValue)
-            var humidity: Double = json_["main"]["humdity"].doubleValue
-            var temperature: Double = json_["main"]["temp"].doubleValue
-            var tempHigh: Double = json_["main"]["temp_max"].doubleValue
-            var templow: Double = json_["main"]["temp_min"].doubleValue
-            var location: String = json_["name"].stringValue
-            var sunrise: NSDate = NSDate(timeIntervalSince1970: json_["sys"]["sunrise"].doubleValue)
-            var sunset: NSDate = NSDate(timeIntervalSince1970: json_["sys"]["sunset"].doubleValue)
-            var description: String = json_["weather"][0]["description"].stringValue
-            var condition: String = json_["weather"][0]["main"].stringValue
-            var windBearing: Double = json_["wind"]["deg"].doubleValue
-            var windSpeed: Double = json_["wind"]["speed"].doubleValue //* MPS_TO_MPH
-            var icon: String = json_["weather"][0]["icon"].stringValue
-            
-            // Create WXCondition from the JSON data returned
-            return WXCondition(date_: date, humidity_: humidity, temperature_: temperature, tempHigh_: tempHigh, tempLow_: templow, locationName_: location, sunrise_: sunrise, sunset_: sunset, conditionDescription_: description, condition_: condition, windBearing_: windBearing, windSpeed_: windSpeed, icon_: icon)
+            return getCurrentOrHourlyCondition(json_)
         }
+    }
+    
+    func getCurrentOrHourlyCondition(json_: JSON) -> WXCondition {
+        var date: NSDate = NSDate(timeIntervalSince1970: json_["dt"].doubleValue)
+        var humidity: Double = json_["main"]["humdity"].doubleValue
+        var temperature: Double = json_["main"]["temp"].doubleValue
+        var tempHigh: Double = json_["main"]["temp_max"].doubleValue
+        var templow: Double = json_["main"]["temp_min"].doubleValue
+        var location: String = json_["name"].stringValue
+        var sunrise: NSDate = NSDate(timeIntervalSince1970: json_["sys"]["sunrise"].doubleValue)
+        var sunset: NSDate = NSDate(timeIntervalSince1970: json_["sys"]["sunset"].doubleValue)
+        var description: String = json_["weather"][0]["description"].stringValue
+        var condition: String = json_["weather"][0]["main"].stringValue
+        var windBearing: Double = json_["wind"]["deg"].doubleValue
+        var windSpeed: Double = json_["wind"]["speed"].doubleValue //* MPS_TO_MPH
+        var icon: String = json_["weather"][0]["icon"].stringValue
+        
+        // Create WXCondition from the JSON data returned
+        return WXCondition(date_: date, humidity_: humidity, temperature_: temperature, tempHigh_: tempHigh, tempLow_: templow, locationName_: location, sunrise_: sunrise, sunset_: sunset, conditionDescription_: description, condition_: condition, windBearing_: windBearing, windSpeed_: windSpeed, icon_: icon)
+    }
+    
+    func getDailyCondition(json_: JSON) -> WXCondition {
+        var date: NSDate = NSDate(timeIntervalSince1970: json_["dt"].doubleValue)
+        var humidity: Double = json_["main"]["humdity"].doubleValue
+        var temperature: Double = json_["main"]["temp"].doubleValue
+        var tempHigh: Double = json_["temp"]["max"].doubleValue
+        var templow: Double = json_["temp"]["min"].doubleValue
+        var location: String = json_["name"].stringValue
+        var sunrise: NSDate = NSDate(timeIntervalSince1970: json_["sys"]["sunrise"].doubleValue)
+        var sunset: NSDate = NSDate(timeIntervalSince1970: json_["sys"]["sunset"].doubleValue)
+        var description: String = json_["weather"][0]["description"].stringValue
+        var condition: String = json_["weather"][0]["main"].stringValue
+        var windBearing: Double = json_["wind"]["deg"].doubleValue
+        var windSpeed: Double = json_["wind"]["speed"].doubleValue //* MPS_TO_MPH
+        var icon: String = json_["weather"][0]["icon"].stringValue
+        
+        
+        // Create WXCondition from the JSON data returned
+        return(WXCondition(date_: date, humidity_: humidity, temperature_: temperature, tempHigh_: tempHigh, tempLow_: templow, locationName_: location, sunrise_: sunrise, sunset_: sunset, conditionDescription_: description, condition_: condition, windBearing_: windBearing, windSpeed_: windSpeed, icon_: icon))
     }
     
 }
