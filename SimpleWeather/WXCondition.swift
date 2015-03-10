@@ -30,14 +30,14 @@ class WXCondition : NSObject {
         temperature = 0.0
         tempHigh = 0.0
         tempLow = 0.0
-        locationName = ""
+        locationName = "Unknown"
         sunrise = NSDate()
         sunset = NSDate()
-        conditionDescription = ""
-        condition = ""
+        conditionDescription = "Unknown"
+        condition = "Unknown"
         windBearing = 0.0
         windSpeed = 0.0
-        icon = ""
+        icon = "01d"
         super.init()
     }
     
@@ -66,7 +66,6 @@ class WXCondition : NSObject {
         
         var map : Dictionary<String, String> = ["01d" : "weather-clear"]
         map["02d"] = "weather-few"
-        
         map["03d"] = "weather-few"
         map["04d"] = "weather-broken"
         map["09d"] = "weather-shower"
@@ -87,4 +86,12 @@ class WXCondition : NSObject {
         return map
     }
     
+    /**
+    Method for cleanly printing this object to logs
+    **/
+    func description() -> String {
+        return "Date: \(date) Humidity: \(humidity) Temperature: \(temperature) TempHigh: \(tempHigh) TempLow: \(tempLow)"
+        + "LocationName: \(locationName) Sunrise: \(sunrise) Sunset: \(sunset) ConditionDescription: \(conditionDescription)"
+        + "Condition: \(condition) WindBearing: \(windBearing) WindSpeed: \(windSpeed) Icon: \(icon)"
+    }
 }

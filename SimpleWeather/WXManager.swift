@@ -17,9 +17,6 @@ class WXManager : NSObject, CLLocationManagerDelegate {
             updateCurrentConditions(newLocation)
             updateDailyForecast(newLocation)
             updateHourlyForecast(newLocation)
-            if (delegate != nil) {
-                delegate!.onLocationChange(currentCondition, dailyConditions: dailyForecast, hourlyConditions: hourlyForecast)
-            }
         }
     }
     
@@ -49,16 +46,51 @@ class WXManager : NSObject, CLLocationManagerDelegate {
     }
     
     func updateCurrentConditions(location: CLLocation) -> Void {
-        currentCondition = weatherClient.fetchCurrentConditionsForLocation(location.coordinate)
+        weatherClient.fetchCurrentConditionsForLocation(location.coordinate, handleNewCurrentCondition)
     }
     
     func updateDailyForecast(location: CLLocation) -> Void {
-        dailyForecast = weatherClient.fetchDailyForecastForLocation(location.coordinate)
+        weatherClient.fetchDailyForecastForLocation(location.coordinate, handleNewDailyForecast)
     }
     
     func updateHourlyForecast(location: CLLocation) -> Void {
-        hourlyForecast = weatherClient.fetchHourlyForecastForLocation(location.coordinate)
+        weatherClient.fetchHourlyForecastForLocation(location.coordinate, handleNewHourlyForecast)
     }
+    
+    
+    // Handler for weather condition updates
+    func handleNewCurrentCondition(newCondition_ : AnyObject?) -> Void {
+        if (newCondition_ != nil) {
+            currentCondition = newCondition_ as WXCondition
+            
+            if (delegate != nil) {
+                delegate!.onLocationChange(currentCondition, dailyConditions: dailyForecast, hourlyConditions: hourlyForecast)
+            }
+        }
+    }
+    
+    // Handler for daily forecast updates
+    func handleNewDailyForecast(newForecast_ : AnyObject?) -> Void {
+        if (newForecast_ != nil) {
+            dailyForecast = newForecast_ as Array<WXCondition>
+            
+            if (delegate != nil) {
+                delegate!.onLocationChange(currentCondition, dailyConditions: dailyForecast, hourlyConditions: hourlyForecast)
+            }
+        }
+    }
+    
+    // Handler for hourly forecast updates
+    func handleNewHourlyForecast(newForecast_ : AnyObject?) -> Void {
+        if (newForecast_ != nil) {
+            hourlyForecast = newForecast_ as Array<WXCondition>
+            
+            if (delegate != nil) {
+                delegate!.onLocationChange(currentCondition, dailyConditions: dailyForecast, hourlyConditions: hourlyForecast)
+            }
+        }
+    }
+    
     
     func findCurrentLocation() -> Void {
         isFirstUpdate = true
@@ -67,17 +99,20 @@ class WXManager : NSObject, CLLocationManagerDelegate {
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         // Generally returns the last known location in the first update, so ignore.
-        if (isFirstUpdate) {
+        /*if (isFirstUpdate) {
             isFirstUpdate = false
             return
-        }
+        }*/
         
         var location: CLLocation = locations.last as CLLocation
         
         // If we have an accurate location, update our curentLocation and stop updating.
         if (location.horizontalAccuracy > 0) {
+            NSLog("Hoizontal accuracy of \(location.horizontalAccuracy). Updating location and stopping location updates")
             currentLocation = location
             locationManager.stopUpdatingLocation()
+        } else {
+            NSLog("Hoizontal accuracy of \(location.horizontalAccuracy). Ignoring location update")
         }
     }
 }

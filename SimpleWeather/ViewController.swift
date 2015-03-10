@@ -158,7 +158,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         iconView!.backgroundColor = UIColor.clearColor()
         header.addSubview(iconView!)
         
-        NSLog("about to tell the weather manager to find the current location")
+        //NSLog("Firing weatherManager.findCurrentLocation")
+
         weatherManager.findCurrentLocation()
     }
     
@@ -216,7 +217,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return tableCell
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        //var cellCount: NSInteger = tableView.numberOfRowsInSection(indexPath.section)
+        var cellCount : NSInteger = 8
+        return screenHeight / CGFloat(cellCount)
+        
+        //return 44
+    }
+    
     func onLocationChange(currentCondition: WXCondition, dailyConditions: Array<WXCondition>, hourlyConditions: Array<WXCondition>) {
+        NSLog("Location notification in ViewController.  New condition: \(currentCondition)")
         temperatureLabel?.text = NSString(format: "%.0f°", currentCondition.temperature)
         conditionsLabel?.text = currentCondition.condition.capitalizedString
         cityLabel?.text = currentCondition.locationName.capitalizedString
@@ -236,6 +246,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.blurredImageView.frame = bounds
         self.tableView.frame = bounds
         
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        var height: CGFloat = scrollView.bounds.size.height
+        var position: CGFloat = max(scrollView.contentOffset.y, 0.0);
+        var percent: CGFloat = min(position / height, 1.0);
+        self.blurredImageView.alpha = percent;
     }
     
     func configureHeaderCell(cell: UITableViewCell, title: String) -> Void {
