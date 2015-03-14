@@ -158,8 +158,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         iconView!.backgroundColor = UIColor.clearColor()
         header.addSubview(iconView!)
         
-        //NSLog("Firing weatherManager.findCurrentLocation")
-
         weatherManager.findCurrentLocation()
     }
     
@@ -221,8 +219,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //var cellCount: NSInteger = tableView.numberOfRowsInSection(indexPath.section)
         var cellCount : NSInteger = 8
         return screenHeight / CGFloat(cellCount)
-        
-        //return 44
     }
     
     func onLocationChange(currentCondition: WXCondition, dailyConditions: Array<WXCondition>, hourlyConditions: Array<WXCondition>) {
@@ -263,6 +259,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func configureHourlyCell(cell: UITableViewCell, weather: WXCondition) -> Void {
+        NSLog("Configuring hourly cell for condition \(weather)")
         cell.textLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 18)
         cell.detailTextLabel?.font = UIFont(name:"HelveticaNeue-Medium", size:18)
         cell.textLabel?.text = self.hourlyFormatter.stringFromDate(weather.date)
@@ -273,6 +270,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func configureDailyCell(cell: UITableViewCell, weather: WXCondition) -> Void {
+        NSLog("Configuring daily cell for condition \(weather)")
         cell.textLabel?.font = UIFont(name:"HelveticaNeue-Light", size:18)
         cell.detailTextLabel?.font = UIFont(name:"HelveticaNeue-Medium", size:18)
         cell.textLabel?.text = self.dailyFormatter.stringFromDate(weather.date)
